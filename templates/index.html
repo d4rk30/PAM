@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%- block content -%}
+	<ul>
+		{%- for subdomain in subdomains -%}
+			<li>
+				{{- subdomain.url -}}
+			</li>
+		{%- endfor -%}
+	</ul>
+{%- endblock -%}
