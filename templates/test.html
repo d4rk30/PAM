@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{%- block style -%}
+	{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+{%- endblock -%}
+{%- block content -%}
+	<form method="post">
+		{{- form.csrf_token -}}
+		{{- form.username.label -}}<br>{{- form.username -}}<br>
+		{{- form.password.label -}}<br>{{- form.password -}}<br>
+		{{- form.remember -}} {{- form.remember.label -}}<br>
+		{{- form.submit }}<br>
+	</form>
+{%- endblock -%}

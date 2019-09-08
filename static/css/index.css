@@ -1,0 +1,36 @@
+.left-block {
+	width: 86px;
+	background-color: #0A0F18;
+}
+
+.left-block ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center; #主轴对齐方式，居中对齐
+	align-items: stretch; #交叉轴对齐方式，默认值，占满容器高度
+}
+
+.left-block ul li{
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.middle-block {
+	width: 314px;
+	background-color: #1A3341;
+}
+
+.right-block {
+	min-width: 700px;
+	width: 100%;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
+.menu-text{
+	font-size: 12px;
+}

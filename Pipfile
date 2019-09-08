@@ -12,6 +12,8 @@ flask-sqlalchemy = "*"
 python-dotenv = "*"
 python-nmap = "*"
 requests = "*"
+flask-wtf = "*"
+flask-migrate = "*"
 
 [requires]
 python_version = "3.6"
