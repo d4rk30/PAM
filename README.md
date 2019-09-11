@@ -2,7 +2,7 @@
 PockrAssetManagement 破壳资产管理工具
 
 ## 部署方法
-###相关依赖
+### 相关依赖
 - Python3.4+
 - pipenv
 - nmap
@@ -13,9 +13,14 @@ $ sudo apt install nmap
 $ sudo -H pip install pipenv
 ```
 
-### 初始化pipenv环境
+### 初始化虚拟环境
 ```
 $ pipenv install 
+```
+
+### 启动虚拟环境
+```
+$ pipenv shell 
 ```
 
 ### 运行程序
