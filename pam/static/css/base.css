@@ -43,7 +43,7 @@ a {
 }
 
 .left-block {
-	width: 86px;
+	min-width: 86px;
 	background-color: #0B0F18;
 }
 
