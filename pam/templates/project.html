@@ -5,33 +5,28 @@
 {%- endblock -%}
 {%- block content -%}
 	<div class="left-block">
-		<div class="logo">
-			
-		</div>
+		<div class="logo"></div>
 		<ul>
 			<li class="menu-text"><a href="#"><img class="icon" src="{{ url_for('static',filename='img/dashboard.svg') }}"></a></li>
 			<li class="menu-text"><a href="#"><img class="icon" src="{{ url_for('static',filename='img/search.svg') }}"></a></li>
 			<li class="menu-text"><a href="#"><img class="icon" src="{{ url_for('static',filename='img/project.svg') }}"></a></li>
 		</ul>
 	</div>
+	<div class="middle-block">
+		<div>{{ project.name }}</div>
+		<div>{{ project.describe }}</div>
+	</div>
 	<div class="right-block">
 		<form method="post">
-			{{- create_project_form.csrf_token -}}
-			{{- create_project_form.name.label -}}<br>{{- create_project_form.name -}}<br>
-			{{- create_project_form.describe.label -}}<br>{{- create_project_form.describe -}}<br>
-			{{- create_project_form.submit -}}<br>
+			{{- create_domain_form.csrf_token -}}
+			{{- create_domain_form.domain.label -}}<br>{{- create_domain_form.domain -}}<br>
+			{{- create_domain_form.submit -}}<br>
 		</form>
-		<ul>
-			{%- for project in projects -%}
-			<li>
-				<a href="{{- project.name -}}">{{- project.name -}}</a>
-				<div>描述信息</div>
-				<div>主域数量</div>
-				<div>子域数量</div>
-				<div>创建时间</div>
-				
-			</li>
+		{%- for domain in domains -%}
+			<div>{{- domain.domain -}}</div>
+			{%- for subdomain in domain.subdomains -%}
+				<div><a href="{{- subdomain.subdomain -}}">{{- subdomain.subdomain -}}</a></div>
 			{%- endfor -%}
-		</ul>
+		{%- endfor -%}
 	</div>
 {%- endblock -%}

@@ -1,2 +1,4 @@
 .env
 .flaskenv
+.DS_Store
+data.db

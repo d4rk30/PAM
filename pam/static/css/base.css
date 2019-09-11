@@ -1,3 +1,5 @@
+/*基础标签css*/
+
 html,body {
 	margin: 0;
 	padding: 0;
@@ -27,7 +29,10 @@ tbody tr {
 
 a {
 	color: #00C9EF;
+	text-decoration:none;
 }
+
+/*通用css*/
 
 .box-flex {
 	display: flex;
@@ -37,4 +42,38 @@ a {
 	min-height: 100%;
 }
 
+.left-block {
+	width: 86px;
+	background-color: #0B0F18;
+}
 
+.right-block {
+	background-color: #141E28;
+	min-width: 700px;
+	width: 100%;
+}
+
+/*一级导航*/
+
+.left-block ul {
+	display: flex;
+	flex-direction:column;
+	flex-wrap: nowrap;
+	justify-content: flex-start; /*主轴对齐方式，左对齐*/
+	align-items: stretch; /*交叉轴对齐方式，默认值，占满容器高度*/
+}
+
+.left-block ul li{
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
+.menu-text{
+	font-size: 12px;
+}

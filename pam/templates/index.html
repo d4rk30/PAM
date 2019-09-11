@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{%- block style -%}
+	{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+{%- endblock -%}
+{%- block content -%}
+	<div class="left-block">
+		<div class="logo"></div>
+		<ul>
+			<li class="menu-text"><a href="#"><img class="icon" src="{{ url_for('static',filename='img/dashboard.svg') }}"></a></li>
+			<li class="menu-text"><a href="#"><img class="icon" src="{{ url_for('static',filename='img/search.svg') }}"></a></li>
+			<li class="menu-text"><a href="#"><img class="icon" src="{{ url_for('static',filename='img/project.svg') }}"></a></li>
+		</ul>
+	</div>
+	<div class="right-block">
+		<form method="post">
+			{{- create_project_form.csrf_token -}}
+			{{- create_project_form.name.label -}}<br>{{- create_project_form.name -}}<br>
+			{{- create_project_form.describe.label -}}<br>{{- create_project_form.describe -}}<br>
+			{{- create_project_form.submit -}}<br>
+		</form>
+		<ul class="project-list">
+			{%- for project in projects -%}
+				<li>
+					<div class="list-head">
+						<div class="list-head-title item">TITLE</div>
+						<div class="list-head-domain item">DOMAIN COUNT</div>
+						<div class="list-head-subdomain item">SUBDOMAIN COUNT</div>
+						<div class="list-head-datetime item">CREATION TIME</div>
+					</div>
+					<div class="list-content">
+						<div class="title-group item">
+							<a class="title" href="{{- url_for('project',id=project.id) -}}">{{- project.name -}}</a>
+							<div class="describe">{{- project.describe -}}</div>
+						</div>
+						<div class="domain-count item">{{- project.domain_count -}}</div>
+						<div class="subdomain-count item">{{- project.subdomain_count -}}</div>
+						<div class="create-date item">{{- project.datetime.timetuple().tm_year -}}-{{- project.datetime.timetuple().tm_mon -}}-{{- project.datetime.timetuple().tm_mday -}}&nbsp;&nbsp;{{- project.datetime.timetuple().tm_hour -}}:{{- project.datetime.timetuple().tm_min -}}</div>
+					</div>
+				</li>
+			{%- endfor -%}
+		</ul>
+	</div>
+{%- endblock -%}

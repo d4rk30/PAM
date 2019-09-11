@@ -14,5 +14,5 @@ class CreateProjectForm(FlaskForm):
 	submit = SubmitField('Create')
 	
 class CreateDomainForm(FlaskForm):
-	url = StringField('Domain',validators = [DataRequired()])
+	domain = StringField('Domain',validators = [DataRequired()])
 	submit = SubmitField('Create')
