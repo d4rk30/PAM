@@ -23,6 +23,13 @@ $ pipenv install
 $ pipenv shell 
 ```
 
+### 创建数据库
+```
+$ flask shell
+>>> from pam import db
+>>> db.create_all()
+```
+
 ### 运行程序
 ```
 $ flask run 
