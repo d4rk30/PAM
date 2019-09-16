@@ -41,9 +41,11 @@ def project(id):
 def searchSubdomain(domain):
 	with open('dictionary/wydomain.csv','r') as f:
 		for sub in f.readlines():
+			http = 'http://'+sub.strip()+'.'+domain.domain
+			https = 'https://'+sub.strip()+'.'+domain.domain
+			r = None
+			rs = None
 			try:
-				http = 'http://'+sub.strip()+'.'+domain.domain
-				https = 'https://'+sub.strip()+'.'+domain.domain
 				rs = requests.get(https,headers=HEADERS,timeout=2,allow_redirects=False)
 				if rs.status_code == 200:
 					subdomain = Subdomain(subdomain = https)
@@ -52,21 +54,24 @@ def searchSubdomain(domain):
 					db.session.commit()
 					print(https)
 				else:
+					try:
+						r = requests.get(http,headers=HEADERS,timeout=2,allow_redirects=False)
+						if r.status_code == 200:
+							subdomain = Subdomain(subdomain = http)
+							db.session.add(subdomain)
+							domain.subdomains.append(subdomain)
+							db.session.commit()
+							print(http)
+					except requests.exceptions.RequestException as e:
+						pass
+			except requests.exceptions.RequestException as e:
+				try:
 					r = requests.get(http,headers=HEADERS,timeout=2,allow_redirects=False)
-					if rs.status_code == 200:
+					if r.status_code == 200:
 						subdomain = Subdomain(subdomain = http)
 						db.session.add(subdomain)
 						domain.subdomains.append(subdomain)
 						db.session.commit()
 						print(http)
-			except requests.exceptions.RequestException as e:
-				pass
-			
-			
-			
-			
-			
-					
-			
-
-	
+				except requests.exceptions.RequestException as e:
+					pass
