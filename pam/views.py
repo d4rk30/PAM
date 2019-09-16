@@ -14,7 +14,7 @@ def projectList():
 	if request.method == 'POST' and create_project_form.validate():
 		name = create_project_form.name.data
 		describe = create_project_form.describe.data
-		project = Project(name = name,describe = describe)
+		project = Project(name = name,describe = describe,domain_count = 0,subdomain_count = 0)
 		db.session.add(project)
 		db.session.commit()
 		return redirect(url_for('projectList'))
@@ -30,28 +30,32 @@ def project(id):
 		db.session.add(domain)
 		project = Project.query.filter(Project.id == id).first_or_404()
 		project.domains.append(domain)
+		project.domain_count = project.domain_count + 1
 		db.session.commit()
-		p = Process(target=searchSubdomain, args=(domain,))
+		p = Process(target=searchSubdomain, args=(domain,project,))
 		p.start()
 		return redirect(url_for('project',id=id))
 	domains = Project.query.get(id).domains
 	project = Project.query.get_or_404(id)
 	return render_template('project.html',create_domain_form=create_domain_form,domains = domains,project = project)
 	
-def searchSubdomain(domain):
+def searchSubdomain(domain,project):
+	print(project)
+	print(project.subdomain_count)
 	with open('dictionary/wydomain.csv','r') as f:
 		for sub in f.readlines():
 			http = 'http://'+sub.strip()+'.'+domain.domain
 			https = 'https://'+sub.strip()+'.'+domain.domain
-			r = None
-			rs = None
 			try:
 				rs = requests.get(https,headers=HEADERS,timeout=2,allow_redirects=False)
 				if rs.status_code == 200:
 					subdomain = Subdomain(subdomain = https)
 					db.session.add(subdomain)
 					domain.subdomains.append(subdomain)
+					print(project.subdomain_count)
+					project.subdomain_count = project.subdomain_count + 1
 					db.session.commit()
+					print(project.subdomain_count)
 					print(https)
 				else:
 					try:
@@ -60,6 +64,7 @@ def searchSubdomain(domain):
 							subdomain = Subdomain(subdomain = http)
 							db.session.add(subdomain)
 							domain.subdomains.append(subdomain)
+							project.subdomain_count = project.subdomain_count + 1
 							db.session.commit()
 							print(http)
 					except requests.exceptions.RequestException as e:
@@ -71,6 +76,7 @@ def searchSubdomain(domain):
 						subdomain = Subdomain(subdomain = http)
 						db.session.add(subdomain)
 						domain.subdomains.append(subdomain)
+						project.subdomain_count = project.subdomain_count + 1
 						db.session.commit()
 						print(http)
 				except requests.exceptions.RequestException as e:
