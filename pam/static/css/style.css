@@ -1,3 +1,11 @@
+a {
+	color: #17a2b8;
+}
+
+a:hover {
+	color: #1B8598;
+}
+
 .bg-deepblue {
 	background-color: #38546A;
 }
@@ -16,4 +24,13 @@
 	color: #fff;
 	background-color: #1B8598;
 	border-color: #1B8598;
+}
+
+.page-link {
+	color: #17a2b8;
+}
+
+.page-item.active .page-link {
+	background-color: #17a2b8;
+	border-color: #17a2b8;
 }
