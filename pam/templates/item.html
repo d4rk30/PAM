@@ -22,11 +22,6 @@
 {%- endblock -%}
 {%- block content -%}
 	<div class="float-right mt-3 mb-3">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item active" aria-current="page">Project</li>
-			</ol>
-		</nav>
 		<button type="button" class="btn btn-bluegreen" data-toggle="modal" data-target="#exampleModal">
 				Create
 		</button>
@@ -62,16 +57,16 @@
 	<table class="table table-bordered">
 		<thead class="thead-light">
 			<tr>
-				<th scope="col">Project Name</th>
-				<th scope="col">Domain Count</th>
-				<th scope="col">Subdomain Count</th>
-				<th scope="col">Creation Time</th>
+				<th scope="col">Name</th>
+				<th scope="col">DOMAIN COUNT</th>
+				<th scope="col">SUBDOMAIN COUNT</th>
+				<th scope="col">CREATION TIME</th>
 			</tr>
 		</thead>
 		<tbody>
 			{%- for project in projects -%}
 				<tr>
-					<td><a class="title" href="{{- url_for('item',id=project.id) -}}">{{- project.name -}}</a></td>
+					<td><a class="title" href="{{- url_for('project',id=project.id) -}}">{{- project.name -}}</a></td>
 					<td>{{- project.domain_count -}}</td>
 					<td>{{- project.subdomain_count -}}</td>
 					<td>{{- project.datetime.timetuple().tm_year -}}-{{- project.datetime.timetuple().tm_mon -}}-{{- project.datetime.timetuple().tm_mday -}}&nbsp;&nbsp;{{- project.datetime.timetuple().tm_hour -}}:{{- project.datetime.timetuple().tm_min -}}</td>

@@ -20,8 +20,8 @@ def getSubdomain(domain,project,db):
 					domain.subdomains.append(subdomain)
 					project.subdomain_count = project.subdomain_count + 1
 					db.session.commit()
-					rs.encoding = 'utf-8'
 #					TODO获取网站Title
+					rs.encoding="utf-8"
 					soup = BeautifulSoup(rs.text,'lxml')
 					print(https)
 					print(soup.title)

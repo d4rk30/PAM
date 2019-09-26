@@ -1,0 +1,15 @@
+.bg-deepblue {
+	background-color: #38546A;
+}
+
+.btn-bluegreen {
+	color: #fff;
+	background-color: #149CB5;
+	border-color: #149CB5;
+}
+
+.btn-bluegreen:hover {
+	color: #fff;
+	background-color: #1B8598;
+	border-color: #1B8598;
+}

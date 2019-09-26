@@ -17,6 +17,7 @@ flask-migrate = "*"
 beautifulsoup4 = "*"
 lxml = "*"
 html5lib = "*"
+bootstrap-flask = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"

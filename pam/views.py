@@ -5,9 +5,20 @@ from pam.models import Project,Domain
 from pam.forms import CreateProjectForm,CreateDomainForm
 from pam.lib import getSubdomain
 
+@app.route('/index/',methods=['GET','POST'])
+@app.route('/index',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
+def index():
+	return render_template('index.html')
+
+@app.route('/home/',methods=['GET','POST'])
+@app.route('/home',methods=['GET','POST'])
+def home():
+	return render_template('home.html')
+
 @app.route('/project/',methods=['GET','POST'])
 @app.route('/project',methods=['GET','POST'])
-def projectList():
+def project():
 	create_project_form = CreateProjectForm()
 	if request.method == 'POST' and create_project_form.validate():
 		name = create_project_form.name.data
@@ -15,13 +26,13 @@ def projectList():
 		project = Project(name = name,describe = describe,domain_count = 0,subdomain_count = 0)
 		db.session.add(project)
 		db.session.commit()
-		return redirect(url_for('projectList'))
+		return redirect(url_for('project'))
 	projects = Project.query.all()
-	return render_template('index.html',create_project_form=create_project_form,projects = projects)
+	return render_template('project.html',create_project_form=create_project_form,projects = projects)
 
 @app.route('/project/<id>/',methods=['GET','POST'])
 @app.route('/project/<id>',methods=['GET','POST'])
-def project(id):
+def item(id):
 	create_domain_form = CreateDomainForm()
 	if request.method == 'POST' and create_domain_form.validate():
 		domain = Domain(domain = create_domain_form.domain.data)
@@ -32,7 +43,7 @@ def project(id):
 		db.session.commit()
 		p = Process(target=getSubdomain, args=(domain,project,db,))
 		p.start()
-		return redirect(url_for('project',id=id))
+		return redirect(url_for('item',id=id))
 	domains = Project.query.get(id).domains
 	project = Project.query.get_or_404(id)
-	return render_template('project.html',create_domain_form=create_domain_form,domains = domains,project = project)
+	return render_template('item.html',create_domain_form=create_domain_form,domains = domains,project = project)

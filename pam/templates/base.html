@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 	<head>
 		{%- block head -%}
 			<meta charset = "utf-8">
-			<meta name = "viewport" content = "initial-scale=1.0,user-scalable=no">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 			<title>
 				{%- block title -%}
 					POCKR ASSETS MANAGEMENT
 				{%- endblock title -%}
 			</title>
+			{{ bootstrap.load_css() }}
 			{%- block style -%}
-				<link rel="stylesheet" href="{{ url_for('static',filename='css/base.css') }}">
+				<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
 			{%- endblock style -%}
-		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.15&key=dc26cd892f0b99b80f981764d3ab167d"></script>
 		{%- endblock head %}
 	</head>
 	<body>
-		<div class="box-flex">
+		{%- block header -%}
+		{%- endblock header -%}
+		<div class="container">
 			{%- block content -%}
-			{%- endblock content -%}	
+			{%- endblock content -%}
+			{%- block footer -%}
+			{%- endblock footer -%}
 		</div>
-		{%- block footer -%}
-		{%- endblock footer -%}
 		{%- block script -%}
 		{%- endblock script %}
+		{{ bootstrap.load_js() }}
 	</body>
 </html>
 

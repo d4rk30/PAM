@@ -9,7 +9,7 @@ class LoginForm(FlaskForm):
 	submit = SubmitField('Log in')
 	
 class CreateProjectForm(FlaskForm):
-	name = StringField('Project',validators = [DataRequired()])
+	name = StringField('Project Name',validators = [DataRequired()])
 	describe = StringField('Describe',validators = [DataRequired()])
 	submit = SubmitField('Create')
 	
