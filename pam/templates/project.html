@@ -52,14 +52,20 @@
 				<div class="modal-body">
 					<form method="post">
 						{{- create_project_form.csrf_token -}}
-						{{- create_project_form.name.label -}}<br>{{- create_project_form.name -}}<br>
-						{{- create_project_form.describe.label -}}<br>{{- create_project_form.describe -}}<br>
-						{{- create_project_form.submit -}}<br>
-					</form>
+						<div class="form-group">
+							{{- create_project_form.name.label -}}
+							{{- create_project_form.name -}}
+						</div>
+						<div class="form-group">
+							{{- create_project_form.describe.label -}}
+							{{- create_project_form.describe -}}
+						</div>
+						
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					{{- create_project_form.submit -}}
+					</form>
 				</div>
 			</div>
 		</div>
@@ -85,24 +91,7 @@
 			{%- endfor -%}
 		</tbody>
 	</table>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-end">
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-					<span class="sr-only">Previous</span>
-				</a>
-			</li>
-			<li class="page-item active"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-					<span class="sr-only">Next</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
+	{% from 'bootstrap/pagination.html' import render_pagination %}
+	{{ render_pagination(pagination,align='right') }}
 {%- endblock -%}
 

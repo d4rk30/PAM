@@ -27,8 +27,11 @@ def project():
 		db.session.add(project)
 		db.session.commit()
 		return redirect(url_for('project'))
-	projects = Project.query.all()
-	return render_template('project.html',create_project_form=create_project_form,projects = projects)
+	page = request.args.get('page',1,type=int) #查询字符串获取当前页数
+	per_page = 20 #每页数量
+	pagination = Project.query.paginate(page,per_page = per_page) #分页对象
+	projects = pagination.items #当前页数记录的列表
+	return render_template('project.html',create_project_form=create_project_form,projects = projects,pagination = pagination)
 
 @app.route('/project/<id>/',methods=['GET','POST'])
 @app.route('/project/<id>',methods=['GET','POST'])
