@@ -1,5 +1,13 @@
 # PAM
 PockrAssetManagement 破壳资产管理工具
+PAM是一款面向白帽子的资产管理工具，它可以按照项目进行分类，提供目标站点的主域之后，后台可以实时+定期探测子域，并且在此基础上进行资产收集，包括如下信息：
+- 域名
+- IP
+- 开放端口与服务
+- Whois信息
+- web指纹识别
+- 相关漏洞提示
+...
 ![](https://other-1256870184.cos.ap-beijing.myqcloud.com/2019-10-09-127.0.0.1_5000_project.png)
 ![](https://other-1256870184.cos.ap-beijing.myqcloud.com/2019-10-09-127.0.0.1_5000_project_2.png)
 ## 开发进度
