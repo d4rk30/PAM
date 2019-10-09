@@ -11,8 +11,8 @@ class LoginForm(FlaskForm):
 class CreateProjectForm(FlaskForm):
 	name = StringField('Project Name',render_kw = {'class':'form-control'},validators = [DataRequired()])
 	describe = StringField('Describe',render_kw = {'class':'form-control'},validators = [DataRequired()])
-	submit = SubmitField('Create',render_kw = {'class':'btn btn-bluegreen'})
+	submit = SubmitField('Create',render_kw = {'class':'btn btn-primary'})
 	
 class CreateDomainForm(FlaskForm):
-	domain = StringField('Domain',validators = [DataRequired()])
-	submit = SubmitField('Create')
+	domain = StringField('Domain',render_kw = {'class':'form-control'},validators = [DataRequired()])
+	submit = SubmitField('Create',render_kw = {'class':'btn btn-primary'})

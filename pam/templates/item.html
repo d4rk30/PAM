@@ -1,78 +1,85 @@
 {% extends 'base.html' %}
 {%- block header -%}
-	<nav class="navbar navbar-expand-lg navbar-dark bg-deepblue pl-5 pr-5">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark pl-5 pr-5">
 		<a class="navbar-brand text-light" href="{{ url_for('index') }}">PAM</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		{% from 'bootstrap/nav.html' import render_nav_item %}
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('home') }}">Home<span class="sr-only">(current)</span></a>
+					{{ render_nav_item('home', 'Home') }}
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="{{ url_for('project') }}">Project</a>
+					{{ render_nav_item('project', 'Project') }}
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Intelligence</a>
+					{{ render_nav_item('intelligence', 'Intelligence') }}
 				</li>
 			</ul>
 		</div>
 	</nav>
+	<div class="container-fluid bg-light pl-5 pr-5 pt-3 pb-3">
+			<div class="row">
+				<div class="col-4">
+					<form>
+						<input class="form-control" type="search" placeholder="Search Subdomain" aria-label="Search">
+					</form>
+				</div>
+				<div class="col-8">
+					<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+						Add Domain
+					</button>
+				</div>
+			</div>
+		</div>
 {%- endblock -%}
-{%- block content -%}
-	<div class="float-right mt-3 mb-3">
-		<button type="button" class="btn btn-bluegreen" data-toggle="modal" data-target="#exampleModal">
-				Create
-		</button>
-	</div>
-	
+
+{%- block content -%}	
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Create Project</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Add Domain</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
 					<form method="post">
-						{{- create_project_form.csrf_token -}}
-						{{- create_project_form.name.label -}}<br>{{- create_project_form.name -}}<br>
-						{{- create_project_form.describe.label -}}<br>{{- create_project_form.describe -}}<br>
-						{{- create_project_form.submit -}}<br>
-					</form>
+						{{- create_domain_form.csrf_token -}}
+						<div class="form-group">
+							{{- create_domain_form.domain.label -}}
+							{{- create_domain_form.domain -}}
+						</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					{{- create_domain_form.submit -}}
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	
-	<table class="table table-bordered">
+	<table class="table table-bordered mt-4">
 		<thead class="thead-light">
 			<tr>
-				<th scope="col">Name</th>
-				<th scope="col">DOMAIN COUNT</th>
-				<th scope="col">SUBDOMAIN COUNT</th>
-				<th scope="col">CREATION TIME</th>
+				<th scope="col">ID</th>
+				<th scope="col">Subdomain</th>
 			</tr>
 		</thead>
 		<tbody>
-			{%- for project in projects -%}
+			{%- for subdomain in subdomains -%}
 				<tr>
-					<td><a class="title" href="{{- url_for('project',id=project.id) -}}">{{- project.name -}}</a></td>
-					<td>{{- project.domain_count -}}</td>
-					<td>{{- project.subdomain_count -}}</td>
-					<td>{{- project.datetime.timetuple().tm_year -}}-{{- project.datetime.timetuple().tm_mon -}}-{{- project.datetime.timetuple().tm_mday -}}&nbsp;&nbsp;{{- project.datetime.timetuple().tm_hour -}}:{{- project.datetime.timetuple().tm_min -}}</td>
+					<td>{{- subdomain.id -}}</td>
+					<td><a href="{{- subdomain.subdomain -}}">{{- subdomain.subdomain -}}</a></td>
 				</tr>
 			{%- endfor -%}
 		</tbody>
 	</table>
+	{% from 'bootstrap/pagination.html' import render_pagination %}
+	{{ render_pagination(pagination,align='right') }}
 {%- endblock -%}
-

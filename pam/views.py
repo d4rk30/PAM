@@ -1,7 +1,7 @@
 from flask import render_template,redirect,url_for,request,flash
 from multiprocessing import Process
 from pam import app,db
-from pam.models import Project,Domain
+from pam.models import Project,Domain,Subdomain
 from pam.forms import CreateProjectForm,CreateDomainForm
 from pam.lib import getSubdomain
 
@@ -47,6 +47,13 @@ def item(id):
 		p = Process(target=getSubdomain, args=(domain,project,db,))
 		p.start()
 		return redirect(url_for('item',id=id))
-	domains = Project.query.get(id).domains
-	project = Project.query.get_or_404(id)
-	return render_template('item.html',create_domain_form=create_domain_form,domains = domains,project = project)
+	page = request.args.get('page',1,type=int) #查询字符串获取当前页数
+	per_page = 20 #每页数量
+	pagination = Subdomain.query.filter(Subdomain.project_id == id).paginate(page,per_page = per_page) #分页对象
+	subdomains = pagination.items #当前页数记录的列表
+	return render_template('item.html',create_domain_form=create_domain_form,subdomains = subdomains,pagination = pagination)
+	
+@app.route('/intelligence/',methods=['GET','POST'])
+@app.route('/intelligence',methods=['GET','POST'])
+def intelligence():
+	return render_template('home.html')

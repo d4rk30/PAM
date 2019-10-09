@@ -1,36 +1,34 @@
 {% extends 'base.html' %}
 {%- block header -%}
-	<nav class="navbar navbar-expand-lg navbar-dark bg-deepblue pl-5 pr-5">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark pl-5 pr-5">
 		<a class="navbar-brand text-light" href="{{ url_for('index') }}">PAM</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		{% from 'bootstrap/nav.html' import render_nav_item %}
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('home') }}">Home<span class="sr-only">(current)</span></a>
+					{{ render_nav_item('home', 'Home') }}
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="{{ url_for('project') }}">Project</a>
+					{{ render_nav_item('project', 'Project') }}
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Intelligence</a>
+					{{ render_nav_item('intelligence', 'Intelligence') }}
 				</li>
 			</ul>
 		</div>
 	</nav>
-	<div class="container-fluid bg-lightblue pl-5 pr-5 pt-3 pb-3">
+	<div class="container-fluid bg-light pl-5 pr-5 pt-3 pb-3">
 		<div class="row">
 			<div class="col-4">
 				<form>
 					<input class="form-control" type="search" placeholder="Search Project" aria-label="Search">
 				</form>
 			</div>
-			<div class="col-7">
-							
-			</div>
-			<div class="col-1">
-				<button type="button" class="btn btn-bluegreen" data-toggle="modal" data-target="#exampleModal">
+			<div class="col-8">
+				<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
 					Create
 				</button>
 			</div>
@@ -60,7 +58,6 @@
 							{{- create_project_form.describe.label -}}
 							{{- create_project_form.describe -}}
 						</div>
-						
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -24,6 +24,8 @@ class Project(db.Model):
 
 	#和Domain建立关联关系
 	domains = db.relationship('Domain')
+	#和Subdomain建立关联关系
+	subdomains = db.relationship('Subdomain')
 
 class Domain(db.Model):
 	id = db.Column(db.Integer,primary_key = True)
@@ -42,6 +44,8 @@ class Subdomain(db.Model):
 	
 	#定义外键
 	domain_id = db.Column(db.Integer,db.ForeignKey('domain.id'))
+	#定义外键
+	project_id = db.Column(db.Integer,db.ForeignKey('project.id'))
 
 	#与SubdomainInfo建立关联关系
 	subdomain_infos = db.relationship('SubdomainInfo')

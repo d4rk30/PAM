@@ -18,6 +18,7 @@ def getSubdomain(domain,project,db):
 					subdomain = Subdomain(subdomain = https)
 					db.session.add(subdomain)
 					domain.subdomains.append(subdomain)
+					project.subdomains.append(subdomain)
 					project.subdomain_count = project.subdomain_count + 1
 					db.session.commit()
 #					TODO获取网站Title
@@ -32,6 +33,7 @@ def getSubdomain(domain,project,db):
 							subdomain = Subdomain(subdomain = http)
 							db.session.add(subdomain)
 							domain.subdomains.append(subdomain)
+							project.subdomains.append(subdomain)
 							project.subdomain_count = project.subdomain_count + 1
 							db.session.commit()
 							print(http)
@@ -44,6 +46,7 @@ def getSubdomain(domain,project,db):
 						subdomain = Subdomain(subdomain = http)
 						db.session.add(subdomain)
 						domain.subdomains.append(subdomain)
+						project.subdomains.append(subdomain)
 						project.subdomain_count = project.subdomain_count + 1
 						db.session.commit()
 						print(http)

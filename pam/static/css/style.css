@@ -1,3 +1,7 @@
+.index-banner{
+	background-color: #149CB5;
+}
+
 a {
 	color: #17a2b8;
 }
@@ -6,21 +10,13 @@ a:hover {
 	color: #1B8598;
 }
 
-.bg-deepblue {
-	background-color: #38546A;
-}
-
-.bg-lightblue {
-	background-color: #D7E8ED;
-}
-
-.btn-bluegreen {
+.btn-primary {
 	color: #fff;
 	background-color: #149CB5;
 	border-color: #149CB5;
 }
 
-.btn-bluegreen:hover {
+.btn-primary:hover {
 	color: #fff;
 	background-color: #1B8598;
 	border-color: #1B8598;
@@ -33,4 +29,12 @@ a:hover {
 .page-item.active .page-link {
 	background-color: #17a2b8;
 	border-color: #17a2b8;
+}
+
+.bg-dark {
+	background-color: #38546A !important;
+}
+
+.bg-light {
+	background-color: #D7E8ED !important;
 }
