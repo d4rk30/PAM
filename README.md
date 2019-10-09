@@ -1,12 +1,13 @@
 # PAM
 PockrAssetManagement 破壳资产管理工具
-![](https://other-1256870184.cos.ap-beijing.myqcloud.com/2019-09-26-127.0.0.1_5000_project.png)
+![](https://other-1256870184.cos.ap-beijing.myqcloud.com/2019-10-09-127.0.0.1_5000_project.png)
+![](https://other-1256870184.cos.ap-beijing.myqcloud.com/2019-10-09-127.0.0.1_5000_project_2.png)
 ## 开发进度
 - [x] 数据库设计
 - [x] 项目结构搭建
-- [ ] 项目管理
-- [ ] 主域管理
-- [ ] 子域管理与探测
+- [x] 项目管理
+- [x] 主域管理
+- [x] 子域管理与探测
 - [ ] 获取IP与端口开放服务
 - [ ] 获取Whois信息
 - [ ] 后台目录扫描
